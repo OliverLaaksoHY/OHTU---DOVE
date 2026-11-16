@@ -29,3 +29,10 @@ def create_reference():
         return redirect("/add_reference")
 
     return redirect("/")
+
+# testausta varten oleva reitti
+if test_env:
+    @app.route("/reset_db")
+    def reset_database():
+        reset_db()
+        return jsonify({ 'message': "db reset" })

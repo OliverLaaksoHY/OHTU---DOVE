@@ -2,6 +2,7 @@ from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from config import app, test_env
 import utils
+from repositories.book_reference_repository import db_create_reference
 
 @app.route("/")
 def index():
@@ -14,16 +15,14 @@ def add_reference():
 
 @app.route("/create_reference", methods=["POST"])
 def create_reference():
-
     title = request.form["title"].strip()
     author = request.form["author"].strip()
-
     year = request.form["year"]
     
     try:
         utils.validate_text_entries([("title", title), ("author", author)])
         utils.validate_year_entry(year)
-        ### function call that adds the reference entry to the database 
+        db_create_reference(title, author, year)
     except Exception as error:
         flash(str(error))
         return redirect("/add_reference")

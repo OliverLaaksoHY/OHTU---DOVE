@@ -1,6 +1,6 @@
 from flask import Flask, render_template, flash, request, redirect, session, abort
-import re
 import sqlite3
+import utils
 app = Flask(__name__)
 
 @app.route("/")
@@ -16,23 +16,18 @@ def add_reference():
 def create_reference():
 
     title = request.form["title"].strip()
-    if len(title) > 50 or not title:
-        flash("Error: Title must be between 1 and 50 letters")
-        return redirect("/add_image")
     author = request.form["author"].strip()
-    if len(author) > 50 or not author:
-        flash("Error: Author must be between 1 and 50 letters")
-        return redirect("/add_reference")
 
     year = request.form["year"]
-    if not re.search("^[1-2][0-9]{3}$", year):
-        flash("Error: Year must be between 1000 and 2999")
-        return redirect("/add_image")
-
-    ### To implement
-    #try:
-    #    references.add_reference(title, author, year)
-    #except sqlite3.IntegrityError:
-    #    return "Already exists"
+    
+    try:
+        utils.validate_text_entries([("title", title), ("author", author)])
+        utils.validate_year_entry(year)
+        ### function call that adds the reference entry to the database 
+        
+        return redirect("/")
+    except Exception as error:
+        flash(str(error))
+        return redirect("/add_reference")
 
     return redirect("/")

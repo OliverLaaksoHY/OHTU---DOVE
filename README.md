@@ -13,11 +13,11 @@ cd OHTU---DOVE
 
 ````bash
 uv sync
-uv run flask --app app run --debug
+uv run python src/index.py
 ````
 
 ## 3. Access app
 
 ````bash
-Use browser to view http://127.0.0.1:5000
+Use browser to view http://127.0.0.1:5001
 ````

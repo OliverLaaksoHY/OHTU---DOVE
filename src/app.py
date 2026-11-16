@@ -1,7 +1,7 @@
-from flask import Flask, render_template, flash, request, redirect, session, abort
-import sqlite3
+from flask import redirect, render_template, request, jsonify, flash
+from db_helper import reset_db
+from config import app, test_env
 import utils
-app = Flask(__name__)
 
 @app.route("/")
 def index():
@@ -24,8 +24,6 @@ def create_reference():
         utils.validate_text_entries([("title", title), ("author", author)])
         utils.validate_year_entry(year)
         ### function call that adds the reference entry to the database 
-        
-        return redirect("/")
     except Exception as error:
         flash(str(error))
         return redirect("/add_reference")

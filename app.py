@@ -26,7 +26,7 @@ def create_reference():
 
     year = request.form["year"]
     if not re.search("^[1-2][0-9]{3}$", year):
-        flash("Error: Focal length must be between 1mm and 999 mm")
+        flash("Error: Year must be between 1000 and 2999")
         return redirect("/add_image")
 
     ### To implement

@@ -1,8 +1,9 @@
-from config import db, app
 from sqlalchemy import text
+from config import db, app
 import os
 
 def reset_db():
+  """Resets the database by clearing all entries from the book_references table."""
   print(f"Clearing contents from table book_references")
   sql = text(f"DELETE FROM book_references")
   db.session.execute(sql)

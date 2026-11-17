@@ -12,7 +12,7 @@
 {% if references %}
     <ul>
     {% for reference in references %}
-        <li>{{ reference.title }} by {{ reference.author }} ({{ reference.year }})</li>
+        <li><a href="/reference/{{ reference.id }}">{{ reference.title }}</a> by {{ reference.author }} ({{ reference.year }})</li>
     {% endfor %}
     </ul>
 {% else %}

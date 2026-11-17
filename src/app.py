@@ -2,7 +2,7 @@ from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from config import app, test_env
 import utils
-from repositories.book_reference_repository import db_create_reference, get_references
+from repositories.book_reference_repository import db_create_reference, get_references, get_reference_by_id
 
 @app.route("/")
 def index():
@@ -29,10 +29,12 @@ def create_reference():
 
     return redirect("/")
 
-@app.route("/show_references")
-def show_references():
-    references = get_references()
-    return render_template("show_references.html", references=references)
+@app.route("/reference/<int:reference_id>")
+def show_reference(reference_id):
+    reference = get_reference_by_id(reference_id)
+    if not reference:
+        return "Reference not found", 404
+    return render_template("show_reference.html", reference=reference)
 
 # testausta varten oleva reitti
 if test_env:

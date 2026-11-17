@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %} {{ reference.title }} {% endblock %}
+
+{% block content %}
+    <p>
+        <a href="/edit_reference/{{reference.id}}">Muokkaa viitteen tiedot</a>
+        <a href="/remove_reference/{{reference.id}}">Poista</a>
+    </p>
+    <h2>{{ reference.title }}</h2>
+    <p>Author: {{ reference.author }}</p>
+    <p>Year: {{ reference.year }}</p>
+{% endblock %}

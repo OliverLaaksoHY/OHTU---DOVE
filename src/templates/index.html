@@ -7,4 +7,16 @@
 <h2>Welcome to DOVE - because Pooki is worth it</h2>
 <p>Hello Pooki!</p>
 
+<h2>References</h2>
+
+{% if references %}
+    <ul>
+    {% for reference in references %}
+        <li>{{ reference.title }} by {{ reference.author }} ({{ reference.year }})</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No references found.</p>
+{% endif %}
+
 {% endblock %}

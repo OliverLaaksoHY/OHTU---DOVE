@@ -2,23 +2,23 @@ from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from config import app, test_env
 import utils
-from repositories.book_reference_repository import db_create_reference
+from repositories.book_reference_repository import db_create_reference, get_references
 
 @app.route("/")
 def index():
-    return render_template("index.html")
-
+    references = get_references()
+    return render_template("index.html", references=references)
 
 @app.route("/add_reference")
 def add_reference():
-   return render_template("add_reference.html")
+    return render_template("add_reference.html")
 
 @app.route("/create_reference", methods=["POST"])
 def create_reference():
     title = request.form["title"].strip()
     author = request.form["author"].strip()
     year = request.form["year"]
-    
+
     try:
         utils.validate_text_entries([("title", title), ("author", author)])
         utils.validate_year_entry(year)
@@ -28,6 +28,11 @@ def create_reference():
         return redirect("/add_reference")
 
     return redirect("/")
+
+@app.route("/show_references")
+def show_references():
+    references = get_references()
+    return render_template("show_references.html", references=references)
 
 # testausta varten oleva reitti
 if test_env:

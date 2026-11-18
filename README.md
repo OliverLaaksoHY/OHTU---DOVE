@@ -9,10 +9,11 @@ git clone git@github.com:OliverLaaksoHY/OHTU---DOVE.git
 cd OHTU---DOVE
 ````
 
-## 2. When running the first time, you need to setup the database
+## 2. When running the first time, you need to setup the database and env
 
 ````bash
 uv sync
+cp .env.example .env
 uv run python src/db_helper.py
 uv run python src/index.py
 ````

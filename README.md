@@ -2,7 +2,9 @@
 
 ## Link to OKD: 
 ## Team rules:
+https://github.com/OliverLaaksoHY/OHTU---DOVE/blob/main/pelisaannot.md
 ## Product and sprint backlogs:
+https://github.com/users/OliverLaaksoHY/projects/1/
 # How to run
 
 ## 1. Clone

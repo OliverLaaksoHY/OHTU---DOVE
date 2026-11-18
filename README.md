@@ -30,3 +30,10 @@ uv run python src/index.py
 ````bash
 Use browser to view http://127.0.0.1:5001
 ````
+
+## 5. To run robot tests you additionally need to run
+
+````bash
+uv run rfbrowser install chromium
+bash run_robot_tests.sh
+````

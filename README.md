@@ -1,5 +1,8 @@
 # OHTU---DOVE
 
+## Link to OKD: 
+## Team rules:
+## Product and sprint backlogs:
 # How to run
 
 ## 1. Clone

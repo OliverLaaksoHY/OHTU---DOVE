@@ -1,0 +1,12 @@
+.venv
+.env
+secret.env
+src/secret.env
+__pycache__
+*.db
+instance/
+.git
+*.log
+log.html
+output.xml
+report.html

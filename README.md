@@ -1,6 +1,7 @@
 # OHTU---DOVE
 
 ## Link to OKD: 
+[App in OKD](https://route-ohjelmistotuotanto-lahiopetus-2026-14.ext.okd-cs-test-0.k8s.cs.helsinki.fi)
 ## Team rules:
 [Team rules](https://github.com/OliverLaaksoHY/OHTU---DOVE/blob/main/pelisaannot.md)
 ## Product and sprint backlogs:

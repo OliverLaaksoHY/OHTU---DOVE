@@ -9,6 +9,8 @@
 
 [Sprint 1 backlog](https://github.com/users/OliverLaaksoHY/projects/1/views/4)
 
+[Sprint 2 backlog](https://github.com/users/OliverLaaksoHY/projects/1/views/5)
+
 # How to run
 
 ## 1. Clone

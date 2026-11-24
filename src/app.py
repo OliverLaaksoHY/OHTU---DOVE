@@ -62,15 +62,22 @@ def update_reference():
     return redirect("/")
 # EDIT REFERENCE END
 
-@app.route("/delete_reference/<int:reference_id>", methods=["POST"])
+@app.route("/delete_reference/<int:reference_id>", methods=["GET", "POST"])
 def delete_reference(reference_id):
     reference = get_reference_by_id(reference_id)
     if not reference:
         return "Reference not found", 404
 
-    db_delete_reference(reference_id)
-    return redirect("/")
+    if request.method == "GET":
+        return render_template("delete_reference.html", reference=reference)
+    if request.method == "POST":
 
+        if "delete" in request.form:
+            db_delete_reference(reference_id)
+            return redirect("/")
+        else:
+            return redirect("/reference/" + str(reference_id))
+    
 # testausta varten oleva reitti
 if test_env:
     @app.route("/reset_db")

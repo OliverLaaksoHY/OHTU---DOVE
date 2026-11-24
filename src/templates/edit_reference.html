@@ -8,17 +8,17 @@
 <form action="/edit_reference" method="post" enctype ="multipart/form-data">
   <p>
     <label for="title">Title:</label> <br />
-    <input type="text" name = "title" id ="title" maxlength="50" required/>
+    <input type="text" name="title" id="title" value="{{ reference.title }}" maxlength="50" required>
   </p>
   
   <p>
     <label for="author">Author:</label> <br />
-    <input type="text" name = "author" id ="author" maxlength="50" required/>
+    <input type="text" name="author" id="author" value="{{ reference.author }}" maxlength="50" required>
   </p>
 
   <p>
     <label for="year">Year:</label> <br/>
-    <input type="number" name = "year" id = "year" pattern="[1-2][0-9]{3} required"/>
+    <input type="number" name="year" id="year" value="{{ reference.year }}" min="1000" max="2999" required>
   </p>
   
   <input type="submit" value="Update reference"/>

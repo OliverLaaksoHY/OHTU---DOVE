@@ -2,7 +2,7 @@ from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from config import app, test_env
 import utils
-from repositories.book_reference_repository import db_update_book_reference, db_create_reference, get_references, get_reference_by_id
+from repositories.book_reference_repository import db_delete_reference, db_update_book_reference, db_create_reference, get_references, get_reference_by_id
 
 @app.route("/")
 def index():
@@ -61,6 +61,15 @@ def update_reference():
 
     return redirect("/")
 # EDIT REFERENCE END
+
+@app.route("/delete_reference/<int:reference_id>", methods=["POST"])
+def delete_reference(reference_id):
+    reference = get_reference_by_id(reference_id)
+    if not reference:
+        return "Reference not found", 404
+
+    db_delete_reference(reference_id)
+    return redirect("/")
 
 # testausta varten oleva reitti
 if test_env:

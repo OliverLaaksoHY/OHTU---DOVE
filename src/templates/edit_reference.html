@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}Edit Reference{% endblock %}
+
+{% block content %}
+<h2>Edit Reference</h2>
+
+<form action="{{ url_for('update_reference') }}" method="post">
+    <input type="hidden" name="reference_id" value="{{ reference.id }}">
+  <p>
+    <label for="title">Title:</label> <br />
+    <input type="text" name="title" id="title" value="{{ reference.title }}" maxlength="50" required>
+  </p>
+  
+  <p>
+    <label for="author">Author:</label> <br />
+    <input type="text" name="author" id="author" value="{{ reference.author }}" maxlength="50" required>
+  </p>
+
+  <p>
+    <label for="year">Year:</label> <br/>
+    <input type="number" name="year" id="year" value="{{ reference.year }}" min="1000" max="2999" required>
+  </p>
+  
+  <input type="submit" value="Update reference"/>
+</form>
+{% endblock %}

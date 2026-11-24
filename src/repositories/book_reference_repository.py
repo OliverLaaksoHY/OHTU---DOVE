@@ -12,6 +12,11 @@ def db_create_reference(title, author, year):
     db.session.execute(sql, { "title": title, "author": author, "year": year })
     db.session.commit()
 
+def db_update_book_reference(reference_id, title, author, year):
+    sql = text("UPDATE book_references SET title = :title, author = :author, year = :year WHERE id = :id")
+    db.session.execute(sql, { "title": title, "author": author, "year": year, "id": reference_id })
+    db.session.commit()
+
 def get_reference_by_id(reference_id):
     sql = text("SELECT id, title, author, year FROM book_references WHERE id = :id")
     result = db.session.execute(sql, { "id": reference_id })

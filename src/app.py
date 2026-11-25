@@ -1,20 +1,31 @@
-from flask import redirect, render_template, request, jsonify, flash
-from db_helper import reset_db
-from config import app, test_env
+"""Flask routes for managing book references."""
+
+from flask import flash, jsonify, redirect, render_template, request
+
 import utils
-from repositories.book_reference_repository import db_delete_reference, db_update_book_reference, db_create_reference, get_references, get_reference_by_id
+from config import app, test_env
+from db_helper import reset_db
+from repositories.book_reference_repository import (
+    db_create_reference,
+    db_update_book_reference,
+    get_reference_by_id,
+    get_references,
+)
 
 @app.route("/")
 def index():
+    """Render the home page with all saved references."""
     references = get_references()
     return render_template("index.html", references=references)
 
 @app.route("/add_reference")
 def add_reference():
+    """Render the form for adding a reference."""
     return render_template("add_reference.html")
 
 @app.route("/create_reference", methods=["POST"])
 def create_reference():
+    """Validate and save a submitted reference."""
     title = request.form["title"].strip()
     author = request.form["author"].strip()
     year = request.form["year"]
@@ -23,7 +34,7 @@ def create_reference():
         utils.validate_text_entries([("title", title), ("author", author)])
         utils.validate_year_entry(year)
         db_create_reference(title, author, year)
-    except Exception as error:
+    except Exception as error:  # pylint: disable=broad-exception-caught
         flash(str(error))
         return redirect("/add_reference")
 
@@ -31,6 +42,7 @@ def create_reference():
 
 @app.route("/reference/<int:reference_id>")
 def show_reference(reference_id):
+    """Render the detail page for one reference."""
     reference = get_reference_by_id(reference_id)
     if not reference:
         return "Reference not found", 404
@@ -39,6 +51,7 @@ def show_reference(reference_id):
 # EDIT REFERENCE BEGING
 @app.route("/edit_reference/<int:reference_id>")
 def edit_reference(reference_id):
+    """Render the edit form for one reference."""
     reference = get_reference_by_id(reference_id)
     if not reference:
         return "Reference not found", 404
@@ -46,6 +59,7 @@ def edit_reference(reference_id):
 
 @app.route("/update_reference", methods=["POST"])
 def update_reference():
+    """Validate and update a submitted reference."""
     title = request.form["title"].strip()
     author = request.form["author"].strip()
     year = request.form["year"]
@@ -55,7 +69,7 @@ def update_reference():
         utils.validate_text_entries([("title", title), ("author", author)])
         utils.validate_year_entry(year)
         db_update_book_reference(reference_id, title, author, year)
-    except Exception as error:
+    except Exception as error:  # pylint: disable=broad-exception-caught
         flash(str(error))
         return redirect("/edit_reference/" + reference_id)
 
@@ -82,5 +96,6 @@ def delete_reference(reference_id):
 if test_env:
     @app.route("/reset_db")
     def reset_database():
+        """Clear reference data for tests."""
         reset_db()
-        return jsonify({ 'message': "db reset" })
+        return jsonify({"message": "db reset"})

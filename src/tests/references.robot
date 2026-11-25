@@ -41,7 +41,7 @@ Edit Reference Saves Changes To The Selected Book
     Go To    ${HOME_URL}
     Click    text=The Hobit
     ${book_url}=    Get Url
-    Click    text=Muokkaa viitteen tiedot
+    Click    text=Edit reference
     Get Property    id=title    value    ==    The Hobit
     Get Property    id=author    value    ==    J. Tolkien
     Get Property    id=year    value    ==    1936
@@ -66,7 +66,7 @@ Edit Reference Rejects Blank Author
     Go To    ${HOME_URL}
     Click    text=Dune
     ${book_url}=    Get Url
-    Click    text=Muokkaa viitteen tiedot
+    Click    text=Edit reference
     Set Reference Title    Changed title
     Set Reference Author    ${SPACE}
     Click    input[value="Update reference"]
@@ -79,7 +79,7 @@ Remove Reference
     Create Reference    Dune    Frank Herbert    1965
     Go To    ${HOME_URL}
     Click    text=Dune
-    Click    text=Poista
+    Click    text=Delete
     Get Title    ==    Delete Reference
     Get Text    body    *=    Are you sure you want to delete this reference?
     Click    input[name="delete"]

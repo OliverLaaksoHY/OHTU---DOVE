@@ -39,3 +39,9 @@ def get_reference_by_id(reference_id):
     if reference:
         return Reference(reference[0], reference[1], reference[2], reference[3])
     return None
+
+def db_delete_reference(reference_id):
+    """Delete a reference and commit the transaction."""
+    sql = text("DELETE FROM book_references WHERE id = :id")
+    db.session.execute(sql, { "id": reference_id })
+    db.session.commit()

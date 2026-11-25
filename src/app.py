@@ -13,6 +13,7 @@ from repositories.book_reference_repository import (
     db_update_book_reference,
     get_reference_by_id,
     get_references,
+    db_delete_reference
 )
 
 @app.route("/")
@@ -92,6 +93,21 @@ def update_reference():
 
     return redirect("/")
 # EDIT REFERENCE END
+
+@app.route("/delete_reference/<int:reference_id>", methods=["GET", "POST"])
+def delete_reference(reference_id):
+    """Render the delete confirmation page or delete a reference."""
+    reference = get_reference_by_id(reference_id)
+    if not reference:
+        return "Reference not found", 404
+
+    if request.method == "GET":
+        return render_template("delete_reference.html", reference=reference)
+    if request.method == "POST" and "delete" in request.form:
+        db_delete_reference(reference_id)
+        return redirect("/")
+
+    return redirect("/reference/" + str(reference_id))
 
 # testausta varten oleva reitti
 if test_env:

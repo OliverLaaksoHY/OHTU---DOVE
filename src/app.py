@@ -86,13 +86,11 @@ def delete_reference(reference_id):
 
     if request.method == "GET":
         return render_template("delete_reference.html", reference=reference)
-    if request.method == "POST":
+    if request.method == "POST" and "delete" in request.form:
+        db_delete_reference(reference_id)
+        return redirect("/")
 
-        if "delete" in request.form:
-            db_delete_reference(reference_id)
-            return redirect("/")
-        else:
-            return redirect("/reference/" + str(reference_id))
+    return redirect("/reference/" + str(reference_id))
 
 # testausta varten oleva reitti
 if test_env:

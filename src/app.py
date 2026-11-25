@@ -1,8 +1,11 @@
 """Flask routes for managing book references."""
 
+import json
+
 from flask import flash, jsonify, redirect, render_template, request
 
 import utils
+from bibtex import to_bibtex
 from config import app, test_env
 from db_helper import reset_db
 from repositories.book_reference_repository import (
@@ -47,6 +50,20 @@ def show_reference(reference_id):
     if not reference:
         return "Reference not found", 404
     return render_template("show_reference.html", reference=reference)
+
+@app.route("/bibtex/<int:reference_id>")
+def bibtex_entry(reference_id):
+    """Render the BibTeX entry for one reference."""
+    reference = get_reference_by_id(reference_id)
+    if not reference:
+        return "Reference not found", 404
+    bibtex = to_bibtex(reference)
+    return render_template(
+        "bibtex_entry.html",
+        reference=reference,
+        bibtex=bibtex,
+        bibtex_json=json.dumps(bibtex),
+    )
 
 # EDIT REFERENCE BEGING
 @app.route("/edit_reference/<int:reference_id>")

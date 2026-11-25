@@ -1,0 +1,10 @@
+<!--https://www.geeksforgeeks.org/javascript/how-to-create-copy-to-clipboard-button/-->
+{% extends "layout.html" %}
+
+{% block title %} {{ reference.title }} {% endblock %}
+
+{% block content %}
+    <h2>BibTeX</h2>
+    <button type="button" data-bibtex="{{ bibtex_json }}" onclick="navigator.clipboard.writeText(JSON.parse(this.dataset.bibtex))">Copy</button>
+    <pre>{{ bibtex }}</pre>
+{% endblock %}

@@ -13,6 +13,7 @@ def get_references():
     return [Reference(ref[0], ref[1], ref[2], ref[3]) for ref in references]
 
 
+
 def db_create_reference(title, author, year):
     """Insert a reference and commit the transaction."""
     sql = text("INSERT INTO book_references (title, author, year) VALUES (:title, :author, :year)")

@@ -4,9 +4,9 @@
 
 {% block content %}
     <p>
-        <a href="/edit_reference/{{reference.id}}">Muokkaa viitteen tiedot</a>
-        <a href="/bibtex/{{reference.id}}">Näytä BibTeX</a>
-        <a href="/remove_reference/{{reference.id}}">Poista</a>
+        <a href="/edit_reference/{{reference.id}}">Edit reference</a>
+        <a href="/bibtex/{{reference.id}}">View BibTeX</a>
+        <a href="/delete_reference/{{reference.id}}">Delete</a>
     </p>
     <h2>{{ reference.title }}</h2>
     <p>Author: {{ reference.author }}</p>

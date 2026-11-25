@@ -40,6 +40,7 @@ def get_reference_by_id(reference_id):
     return None
 
 def db_delete_reference(reference_id):
+    """Delete a reference and commit the transaction."""
     sql = text("DELETE FROM book_references WHERE id = :id")
     db.session.execute(sql, { "id": reference_id })
     db.session.commit()

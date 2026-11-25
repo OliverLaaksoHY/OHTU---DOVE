@@ -74,3 +74,15 @@ Edit Reference Rejects Blank Author
 
     Go To    ${book_url}
     Reference Should Be Visible    Dune    Frank Herbert    1965
+
+Remove Reference
+    Create Reference    Dune    Frank Herbert    1965
+    Go To    ${HOME_URL}
+    Click    text=Dune
+    Click    text=Poista
+    Get Title    ==    Delete Reference
+    Get Text    body    *=    Are you sure you want to delete this reference?
+    Click    input[name="delete"]
+    Home Page Should Be Open
+    Get Element Count    css=li a[href^="/reference/"]    ==    0
+    Get Text    body    *=    No references found. 

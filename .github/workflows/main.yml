@@ -27,3 +27,6 @@ jobs:
 
       - name: Run pytest
         run: uv run pytest
+
+      - name: Run pylint
+        run: uv run python -m pylint src

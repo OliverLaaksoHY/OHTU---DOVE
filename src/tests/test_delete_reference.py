@@ -1,10 +1,14 @@
 """Unit tests for deleting references."""
 
+import importlib
+import os
 import unittest
 from types import SimpleNamespace
 from unittest.mock import patch
 
-import app as app_module
+os.environ.setdefault("DATABASE_URL", "sqlite://")
+
+app_module = importlib.import_module("app")
 
 
 class TestDeleteReference(unittest.TestCase):

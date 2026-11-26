@@ -86,3 +86,17 @@ Remove Reference
     Home Page Should Be Open
     Get Element Count    css=li a[href^="/reference/"]    ==    0
     Get Text    body    *=    No references found. 
+
+View BibTeX Entry
+    Create Reference    The Hobbit    J. R. R. Tolkien    1937
+    Go To    ${HOME_URL}
+    Click    text=The Hobbit
+    Click    text=View BibTeX
+    Get Text    pre    *=    @book{tolkien1937
+    Get Text    pre    *=    title = {The Hobbit}
+    Get Text    pre    *=    author = {J. R. R. Tolkien}
+    Get Text    pre    *=    year = {1937}
+
+BibTeX Page For Missing Reference Shows Not Found
+    Go To    ${HOME_URL}/bibtex/999999
+    Get Text    body    *=    Reference not found

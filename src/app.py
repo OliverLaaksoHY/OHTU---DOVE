@@ -15,6 +15,7 @@ from repositories.book_reference_repository import (
     get_references,
     db_delete_reference
 )
+from utils import UserInputError
 
 @app.route("/")
 def index():
@@ -38,7 +39,7 @@ def create_reference():
         utils.validate_text_entries([("title", title), ("author", author)])
         utils.validate_year_entry(year)
         db_create_reference(title, author, year)
-    except Exception as error:  # pylint: disable=broad-exception-caught
+    except UserInputError as error:
         flash(str(error))
         return redirect("/add_reference")
 
@@ -87,7 +88,7 @@ def update_reference():
         utils.validate_text_entries([("title", title), ("author", author)])
         utils.validate_year_entry(year)
         db_update_book_reference(reference_id, title, author, year)
-    except Exception as error:  # pylint: disable=broad-exception-caught
+    except UserInputError as error:
         flash(str(error))
         return redirect("/edit_reference/" + reference_id)
 

@@ -4,12 +4,9 @@
 class Reference:
     """Store the fields belonging to a book reference."""
 
-    # Preserve the existing constructor parameter name for compatibility.
-    # pylint: disable=too-few-public-methods
-    def __init__(self, id, title, author, year):
+    def __init__(self, reference_id, title, author, year):
         """Initialize a reference with its database fields."""
-        # pylint: disable=redefined-builtin
-        self.id = id
+        self.id = reference_id
         self.title = title
         self.author = author
         self.year = year

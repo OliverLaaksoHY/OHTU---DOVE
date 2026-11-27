@@ -1,7 +1,6 @@
 """Robot Framework helper library for reference application setup."""
 
 # Robot Framework imports this library by its established filename.
-# pylint: disable=invalid-name
 
 import requests
 
@@ -15,8 +14,9 @@ class AppLibrary:
 
     def reset_application(self):
         """Reset the test database."""
-        response = requests.get(  # pylint: disable=missing-timeout
-            f"{self._base_url}/reset_db"
+        response = requests.get(
+            f"{self._base_url}/reset_db",
+            timeout=10,
         )
         response.raise_for_status()
 
@@ -28,7 +28,9 @@ class AppLibrary:
             "year": year,
         }
 
-        response = requests.post(  # pylint: disable=missing-timeout
-            f"{self._base_url}/create_reference", data=data
+        response = requests.post(
+            f"{self._base_url}/create_reference",
+            data=data,
+            timeout=10,
         )
         response.raise_for_status()
